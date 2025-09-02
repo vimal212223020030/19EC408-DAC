@@ -45,25 +45,23 @@ To write an assembly language program in 8086 to generate Sawtooth and Square wa
 
 ## Program: Square Wave
 
-| Memory Location | Opcode   | Program     | Comments                          |
-|-----------------|----------|-------------|-----------------------------------|
-| 1000            | C6 C0 36 | MOV AL,36H  | Load 36H in Accumulator           |
-| 1003            | E6 CC    | OUT 0CCH,AL | Send through output port          |
-| 1005            | C6 00 0A | MOV AL,10H  | Load 10H in Accumulator           |
-| 1008            | E6 C8    | OUT 0C8H,AL | Send through output port          |
-| 100A            | C6 C0 00 | MOV AL,00H  | Load count value in AL register   |
-| 100D            | E6 C8    | OUT 0C8H,AL | Send through output port          |
-| 100F            | F4       | HLT         | Stop                              |
+| Memory Location | Program     | Comments                          |
+|-----------------|-------------|-----------------------------------|
+| 1000            | MOV AL,00H  | Load 00H in Accumulator           |
+| 1003            |  OUT 0C8H,AL | Send through output port         |
+| 1005            |  CALL DELAY(1100)  | CALL PROGRAM TO 1100      |
+| 1008            |  MOV AL,0FFH |   Load 00H in Accumulator       |
+| 100A            |   OUT 0C8H,AL|  Send through output port       |
+| 100D            |  CALL DELAY(1100) | CALL PROGRAM TO 1100       |
 
-### Assembly Code
 
-```asm
-MOV AL,36H        ; Load 36H in Accumulator
-OUT 0CCH,AL       ; Send through output port
+| Memory Location | Program     | Comments                          |
+|-----------------|-------------|-----------------------------------|
+| 1100            | MOV CX,0505  | Load 0505H in Accumulator           |
+| 1103            |  DEC CX | Decrement CX        |
+| 1105           |  JNZ 1104  | RPEAT UNTILL ZERO      |
+| 1108            |   RET |   RETURN TO MAIN PROGRAM      |
 
-MOV AL,10H        ; Load 10H in Accumulator
-OUT 0C8H,AL       ; Send through output port
 
-MOV AL,00H        ; Load count value in AL register
-OUT 0C8H,AL       ; Send through output port
+
 
